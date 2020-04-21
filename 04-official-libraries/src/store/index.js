@@ -1,4 +1,4 @@
-import Vuex from 'vuex'
+import { createStore } from 'vuex'
 
 const INCREMENT = 'INCREMENT'
 const DECREMENT = 'DECREMENT'
@@ -15,7 +15,7 @@ const storagePlugin = store => {
   })
 }
 
-export default Vuex.createStore({
+export default createStore({
   state: {
     count: parseInt(localStorage.getItem('latest_count') || '0')
   },
