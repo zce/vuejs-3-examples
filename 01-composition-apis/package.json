@@ -1,0 +1,15 @@
+{
+  "name": "01-composition-apis",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "browser-sync . -w --no-notify"
+  },
+  "keywords": [],
+  "author": "zce <w@zce.me> (https://zce.me/)",
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.26.7"
+  }
+}
