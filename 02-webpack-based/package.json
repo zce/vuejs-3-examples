@@ -2,17 +2,25 @@
   "name": "02-webpack-based",
   "version": "0.1.0",
   "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/zce/vuejs-30-beta-examples#readme",
+  "bugs": {
+    "url": "https://github.com/zce/vuejs-30-beta-examples/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zce/vuejs-30-beta-examples.git"
+  },
+  "license": "MIT",
+  "author": "zce <w@zce.me> (https://zce.me/)",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server",
-    "build": "webpack --env.production"
+    "build": "webpack --env.production",
+    "dev": "webpack-dev-server --env.development"
   },
-  "keywords": [],
-  "author": "zce <w@zce.me> (https://zce.me/)",
-  "license": "MIT",
   "dependencies": {
-    "todomvc-app-css": "^2.3.0",
-    "vue": "^3.0.0-beta.2"
+    "todomvc-app-css": "2.3.0",
+    "vue": "3.0.0-beta.3"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "3.0.0-beta.3",
