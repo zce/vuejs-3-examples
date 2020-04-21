@@ -10,6 +10,6 @@
   "author": "zce <w@zce.me> (https://zce.me/)",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.26.7"
+    "browser-sync": "2.26.7"
   }
 }
