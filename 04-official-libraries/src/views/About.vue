@@ -1,0 +1,23 @@
+<template>
+  <div class="about">
+    <h1>This is an about page</h1>
+    <Counter />
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+import { getCurrentInstance } from 'vue'
+import Counter from '@/components/Counter.vue'
+
+export default {
+  name: 'Home',
+  components: {
+    Counter
+  },
+  setup () {
+    const { ctx } = getCurrentInstance()
+    console.log(ctx.$router.currentRoute.value)
+  }
+}
+</script>
