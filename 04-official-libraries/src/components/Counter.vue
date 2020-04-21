@@ -9,6 +9,7 @@
 </template>
 
 <script>
+// classic ------------------------------------------
 // import { mapGetters, mapActions } from 'vuex'
 
 // export default {
@@ -24,24 +25,50 @@
 //   })
 // }
 
-import { getCurrentInstance, computed } from 'vue'
+// composition ------------------------------------------
+// import { getCurrentInstance, computed } from 'vue'
+
+// export default {
+//   name: 'Counter',
+//   setup () {
+//     const { ctx } = getCurrentInstance()
+//     const count = computed(() => ctx.$store.getters.count)
+//     function increment () {
+//       ctx.$store.dispatch('increment')
+//     }
+//     function incrementAsync () {
+//       ctx.$store.dispatch('incrementAsync')
+//     }
+//     function decrement () {
+//       ctx.$store.dispatch('decrement')
+//     }
+//     function decrementAsync () {
+//       ctx.$store.dispatch('decrementAsync')
+//     }
+//     return { count, increment, incrementAsync, decrement, decrementAsync }
+//   }
+// }
+
+// useStore ------------------------------------------------
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default {
   name: 'Counter',
   setup () {
-    const { ctx } = getCurrentInstance()
-    const count = computed(() => ctx.$store.getters.count)
+    const store = useStore()
+    const count = computed(() => store.getters.count)
     function increment () {
-      ctx.$store.dispatch('increment')
+      store.dispatch('increment')
     }
     function incrementAsync () {
-      ctx.$store.dispatch('incrementAsync')
+      store.dispatch('incrementAsync')
     }
     function decrement () {
-      ctx.$store.dispatch('decrement')
+      store.dispatch('decrement')
     }
     function decrementAsync () {
-      ctx.$store.dispatch('decrementAsync')
+      store.dispatch('decrementAsync')
     }
     return { count, increment, incrementAsync, decrement, decrementAsync }
   }

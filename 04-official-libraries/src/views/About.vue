@@ -6,8 +6,24 @@
 </template>
 
 <script>
+// // @ is an alias to /src
+// import { getCurrentInstance } from 'vue'
+// import Counter from '@/components/Counter.vue'
+
+// export default {
+//   name: 'Home',
+//   components: {
+//     Counter
+//   },
+//   setup () {
+//     const { ctx } = getCurrentInstance()
+//     console.log(ctx.$router.currentRoute.value)
+//   }
+// }
+
+// useRoute ----------------------------------------
 // @ is an alias to /src
-import { getCurrentInstance } from 'vue'
+import { useRoute } from 'vue-router'
 import Counter from '@/components/Counter.vue'
 
 export default {
@@ -16,8 +32,8 @@ export default {
     Counter
   },
   setup () {
-    const { ctx } = getCurrentInstance()
-    console.log(ctx.$router.currentRoute.value)
+    const route = useRoute()
+    console.log(route)
   }
 }
 </script>
