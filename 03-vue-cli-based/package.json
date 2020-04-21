@@ -8,19 +8,19 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "todomvc-app-css": "^2.3.0",
-    "vue": "^3.0.0-beta.2"
+    "core-js": "3.6.5",
+    "todomvc-app-css": "2.3.0",
+    "vue": "3.0.0-beta.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.3.0",
-    "@vue/cli-plugin-eslint": "~4.3.0",
-    "@vue/cli-service": "~4.3.0",
-    "@vue/compiler-sfc": "^3.0.0-beta.2",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0-alpha.0",
-    "vue-cli-plugin-vue-next": "~0.1.2"
+    "@vue/cli-plugin-babel": "4.3.1",
+    "@vue/cli-plugin-eslint": "4.3.1",
+    "@vue/cli-service": "4.3.1",
+    "@vue/compiler-sfc": "3.0.0-beta.2",
+    "babel-eslint": "10.1.0",
+    "eslint": "6.8.0",
+    "eslint-plugin-vue": "7.0.0-alpha.0",
+    "vue-cli-plugin-vue-next": "0.1.2"
   },
   "eslintConfig": {
     "root": true,
