@@ -19,7 +19,7 @@
       <input id="toggle-all" class="toggle-all" type="checkbox" v-model="state.allDone">
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
-        <li v-for="todo in state.filteredTodos" class="todo"
+        <li v-for="todo in state.filteredTodos" :key="todo"
           :class="{ completed: todo.completed, editing: todo === state.editingTodo }">
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
@@ -33,7 +33,7 @@
     </section>
     <footer class="footer" v-show="state.todos.length">
       <span class="todo-count">
-        <strong>{{ state.remaining }}</strong> <span>{{ pluralize(state.remaining) }} left</span>
+        <strong>{{ state.remaining }}</strong> {{ pluralize(state.remaining) }} left
       </span>
       <ul class="filters">
         <li><a href="#/all" :class="{ selected: state.visibility === 'all' }">All</a></li>

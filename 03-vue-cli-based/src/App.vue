@@ -9,7 +9,7 @@
       <input id="toggle-all" class="toggle-all" type="checkbox" v-model="state.allDone">
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
-        <li v-for="todo in state.filteredTodos" class="todo" :key="todo"
+        <li v-for="todo in state.filteredTodos" :key="todo"
           :class="{ completed: todo.completed, editing: todo === state.editingTodo }">
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
@@ -35,6 +35,14 @@
       </button>
     </footer>
   </section>
+  <footer class="info">
+    <p>Double-click to edit a todo</p>
+    <!-- Remove the below line ↓ -->
+    <p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+    <!-- Change this out with your name and url ↓ -->
+    <p>Created by <a href="https://zce.me">zce</a></p>
+    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+  </footer>
 </template>
 
 <script>
@@ -144,3 +152,5 @@ export default {
   }
 }
 </script>
+
+<style src="todomvc-app-css/index.css"></style>
