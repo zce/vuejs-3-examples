@@ -2,6 +2,8 @@
   <div class="about">
     <h1>This is an about page</h1>
     <Counter />
+
+    <Modal />
   </div>
 </template>
 
@@ -25,11 +27,13 @@
 // @ is an alias to /src
 import { useRoute } from 'vue-router'
 import Counter from '@/components/Counter.vue'
+import Modal from '@/components/Modal.vue'
 
 export default {
   name: 'Home',
   components: {
-    Counter
+    Counter,
+    Modal
   },
   setup () {
     const route = useRoute()
@@ -37,3 +41,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.about {
+  position: relative;
+  overflow: hidden;
+}
+</style>
