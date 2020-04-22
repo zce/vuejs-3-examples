@@ -81,8 +81,10 @@
           return filters[this.visibility](this.todos)
         },
         allDone: {
-          get: () => !this.remaining,
-          set: (value) => {
+          get () {
+            return !this.remaining
+          },
+          set (value) {
             this.todos.forEach(todo => {
               todo.completed = value
             })
