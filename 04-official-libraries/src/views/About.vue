@@ -13,7 +13,7 @@
 // import Counter from '@/components/Counter.vue'
 
 // export default {
-//   name: 'Home',
+//   name: 'About',
 //   components: {
 //     Counter
 //   },
@@ -30,7 +30,7 @@ import Counter from '@/components/Counter.vue'
 import Modal from '@/components/Modal.vue'
 
 export default {
-  name: 'Home',
+  name: 'About',
   components: {
     Counter,
     Modal

@@ -33,18 +33,12 @@
 //   setup () {
 //     const { ctx } = getCurrentInstance()
 //     const count = computed(() => ctx.$store.getters.count)
-//     function increment () {
-//       ctx.$store.dispatch('increment')
-//     }
-//     function incrementAsync () {
-//       ctx.$store.dispatch('incrementAsync')
-//     }
-//     function decrement () {
-//       ctx.$store.dispatch('decrement')
-//     }
-//     function decrementAsync () {
-//       ctx.$store.dispatch('decrementAsync')
-//     }
+
+//     const increment = () => ctx.$store.dispatch('increment')
+//     const incrementAsync = () => ctx.$store.dispatch('incrementAsync')
+//     const decrement = () => ctx.$store.dispatch('decrement')
+//     const decrementAsync = () => ctx.$store.dispatch('decrementAsync')
+
 //     return { count, increment, incrementAsync, decrement, decrementAsync }
 //   }
 // }
@@ -58,18 +52,12 @@ export default {
   setup () {
     const store = useStore()
     const count = computed(() => store.getters.count)
-    function increment () {
-      store.dispatch('increment')
-    }
-    function incrementAsync () {
-      store.dispatch('incrementAsync')
-    }
-    function decrement () {
-      store.dispatch('decrement')
-    }
-    function decrementAsync () {
-      store.dispatch('decrementAsync')
-    }
+
+    const increment = () => store.dispatch('increment')
+    const incrementAsync = () => store.dispatch('incrementAsync')
+    const decrement = () => store.dispatch('decrement')
+    const decrementAsync = () => store.dispatch('decrementAsync')
+
     return { count, increment, incrementAsync, decrement, decrementAsync }
   }
 }
