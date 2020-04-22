@@ -1,6 +1,6 @@
 <template>
   <button @click="toggle(true)">open</button>
-  <teleport to="#app">
+  <teleport to="#app" :disabled="disabled">
     <div class="modal" v-show="open">
       <h2>Modal title</h2>
       <p>balabala...</p>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
 
 export default {
   name: 'Modal',
@@ -19,7 +19,11 @@ export default {
     const toggle = v => {
       open.value = v
     }
-    return { open, toggle }
+
+    const disabled = ref(false)
+    onUnmounted(() => { disabled.value = true })
+
+    return { open, toggle, disabled }
   }
 }
 </script>
