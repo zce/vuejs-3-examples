@@ -56,7 +56,7 @@
   <!-- <script src="https://unpkg.com/vue@next"></script> -->
   <script type="module">
     // const { createApp, reactive, computed, watchEffect, onMounted, onUnmounted } = Vue
-    import { createApp, reactive, computed, watchEffect, onMounted, onUnmounted } from 'https://unpkg.com/vue@next/dist/vue.esm.js'
+    import { createApp, reactive, computed, watchEffect, onMounted, onUnmounted } from 'https://unpkg.com/vue@next/dist/vue.esm-browser.js'
 
     const storage = {
       get: () => JSON.parse(localStorage.getItem('latest_todos') || '[]'),
