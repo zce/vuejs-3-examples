@@ -23,7 +23,7 @@ module.exports = env => ({
       }
     ]
   },
-  devtool: env.production ? 'hidden-source-map' : 'cheap-eval-source-map',
+  devtool: env.production ? 'nosources-source-map' : 'cheap-eval-source-map',
   devServer: {
     contentBase: 'dist',
     hot: true

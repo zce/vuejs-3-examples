@@ -1,6 +1,6 @@
-# Vue.js 3.0 beta examples
+# Vue.js 3.0 examples
 
-> Some examples of Vue.js 3.0 beta.
+> Some examples of Vue.js 3.0.
 
 - [Composition APIs](01-composition-apis)
 - [Webpack based](02-webpack-based)

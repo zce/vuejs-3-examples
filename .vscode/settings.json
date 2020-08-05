@@ -1,7 +1,6 @@
 {
   "files.exclude": {
     "**/node_modules": true,
-    "**/package-lock.json": true,
-    "**/README.md": true
+    "**/package-lock.json": true
   }
 }

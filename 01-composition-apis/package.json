@@ -12,12 +12,12 @@
     "url": "git+https://github.com/zce/vuejs-30-beta-examples.git"
   },
   "license": "MIT",
-  "author": "zce <w@zce.me> (https://zce.me/)",
+  "author": "zce <w@zce.me> (https://zce.me)",
   "main": "index.js",
   "scripts": {
-    "dev": "browser-sync . -w --no-notify"
+    "dev": "browser-sync . --directory --watch --no-notify"
   },
   "devDependencies": {
-    "browser-sync": "2.26.7"
+    "browser-sync": "2.26.12"
   }
 }

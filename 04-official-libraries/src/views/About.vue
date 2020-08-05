@@ -8,7 +8,6 @@
 </template>
 
 <script>
-// // @ is an alias to /src
 // import { getCurrentInstance } from 'vue'
 // import Counter from '@/components/Counter.vue'
 

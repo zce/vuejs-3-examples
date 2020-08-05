@@ -90,7 +90,7 @@ export default {
       window.removeEventListener('hashchange', onHashChange)
     })
 
-    function onHashChange() {
+    const onHashChange = () => {
       const visibility = window.location.hash.replace(/#\/?/, '')
       if (filters[visibility]) {
         state.visibility = visibility
@@ -100,39 +100,39 @@ export default {
       }
     }
 
-    function addTodo() {
+    const addTodo = () => {
       const text = state.input && state.input.trim()
       if (!text) return
       state.todos.push({ text, completed: false })
       state.input = ''
     }
 
-    function removeTodo(todo) {
+    const removeTodo = todo => {
       state.todos.splice(state.todos.indexOf(todo), 1)
     }
 
-    function editTodo(todo) {
+    const editTodo = todo => {
       state.editingTodo = todo
       state.beforeEditText = todo.text
     }
 
-    function doneEdit(todo) {
+    const doneEdit = todo => {
       if (!state.editingTodo) return
       todo.text = todo.text.trim()
       todo.text || removeTodo(todo)
       state.editingTodo = null
     }
 
-    function cancelEdit(todo) {
+    const cancelEdit = todo => {
       state.editingTodo = null
       todo.text = state.beforeEditText
     }
 
-    function removeCompleted() {
+    const removeCompleted = () => {
       state.todos = filters.active(state.todos)
     }
 
-    function pluralize(count) {
+    const pluralize = count => {
       return count === 1 ? 'item' : 'items'
     }
 
