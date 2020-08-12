@@ -5,27 +5,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vue.js 3.0 Composition APIs</title>
-  <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css/index.css">
 </head>
 
 <body>
-  <section id="app" class="todoapp">
-    <div>original: {{ original.count }}</div>
-    <div>copy: {{ copy.count }}</div>
-
-    <button @click="action1">action1</button>
-    <button @click="action2">action2</button>
+  <section id="app">
+    <button @click="toggle()">toggle show</button>
+    <ul v-show="on">
+      <li v-for="item in posts" :key="item.id">{{ item.title }}</li>
+    </ul>
+    <p>width: <span>{{ width }}</span></p>
+    <p>height: <span>{{ height }}</span></p>
+    <p>hash: <span>{{ hash }}</span></p>
   </section>
 
-  <script type="module">
-    import { createApp } from 'https://unpkg.com/vue@next/dist/vue.esm-browser.js'
-
-    createApp({
-      setup () {
-
-      }
-    }).mount('#app')
-  </script>
+  <script type="module" src="examples.js"></script>
 </body>
 
 </html>
