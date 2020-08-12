@@ -1,16 +1,6 @@
 {
   "name": "02-webpack-based",
   "version": "0.1.0",
-  "description": "",
-  "keywords": [],
-  "homepage": "https://github.com/zce/vuejs-30-beta-examples#readme",
-  "bugs": {
-    "url": "https://github.com/zce/vuejs-30-beta-examples/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zce/vuejs-30-beta-examples.git"
-  },
   "license": "MIT",
   "author": "zce <w@zce.me> (https://zce.me)",
   "main": "index.js",

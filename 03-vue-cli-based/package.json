@@ -2,14 +2,6 @@
   "name": "03-vue-cli-based",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/zce/vuejs-30-beta-examples#readme",
-  "bugs": {
-    "url": "https://github.com/zce/vuejs-30-beta-examples/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zce/vuejs-30-beta-examples.git"
-  },
   "scripts": {
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
@@ -40,13 +32,13 @@
     "vue": "3.0.0-rc.5"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "4.4.6",
-    "@vue/cli-plugin-eslint": "4.4.6",
-    "@vue/cli-service": "4.4.6",
+    "@vue/cli-plugin-babel": "4.5.3",
+    "@vue/cli-plugin-eslint": "4.5.3",
+    "@vue/cli-service": "4.5.3",
     "@vue/compiler-sfc": "3.0.0-rc.5",
     "babel-eslint": "10.1.0",
     "eslint": "7.6.0",
-    "eslint-plugin-vue": "7.0.0-beta.1",
+    "eslint-plugin-vue": "7.0.0-beta.2",
     "vue-cli-plugin-vue-next": "0.1.3"
   }
 }

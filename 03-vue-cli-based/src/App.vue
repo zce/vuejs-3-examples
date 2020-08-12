@@ -60,7 +60,7 @@ const filters = {
 }
 
 export default {
-  setup() {
+  setup () {
     const state = reactive({
       todos: storage.get(),
       input: '',
