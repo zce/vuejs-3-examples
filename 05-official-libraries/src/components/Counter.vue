@@ -8,7 +8,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 // classic ------------------------------------------
 // import { mapGetters, mapActions } from 'vuex'
 
@@ -44,10 +44,10 @@
 // }
 
 // useStore ------------------------------------------------
-import { computed } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useStore } from 'vuex'
 
-export default {
+export default defineComponent({
   name: 'Counter',
   setup () {
     const store = useStore()
@@ -60,7 +60,7 @@ export default {
 
     return { count, increment, incrementAsync, decrement, decrementAsync }
   }
-}
+})
 </script>
 
 <style>

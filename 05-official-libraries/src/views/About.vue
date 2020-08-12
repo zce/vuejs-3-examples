@@ -7,28 +7,13 @@
   </div>
 </template>
 
-<script>
-// import { getCurrentInstance } from 'vue'
-// import Counter from '@/components/Counter.vue'
-
-// export default {
-//   name: 'About',
-//   components: {
-//     Counter
-//   },
-//   setup () {
-//     const { ctx } = getCurrentInstance()
-//     console.log(ctx.$router.currentRoute.value)
-//   }
-// }
-
-// useRoute ----------------------------------------
-// @ is an alias to /src
+<script lang="ts">
+import { defineComponent } from 'vue'
 import { useRoute } from 'vue-router'
 import Counter from '@/components/Counter.vue'
 import Modal from '@/components/Modal.vue'
 
-export default {
+export default defineComponent({
   name: 'About',
   components: {
     Counter,
@@ -38,7 +23,7 @@ export default {
     const route = useRoute()
     console.log(route)
   }
-}
+})
 </script>
 
 <style>

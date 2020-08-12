@@ -9,14 +9,14 @@
   </teleport>
 </template>
 
-<script>
-import { ref, onUnmounted } from 'vue'
+<script lang="ts">
+import { defineComponent, ref, onUnmounted } from 'vue'
 
-export default {
+export default defineComponent({
   name: 'Modal',
   setup () {
     const open = ref(false)
-    const toggle = v => {
+    const toggle = (v: boolean) => {
       open.value = v
     }
 
@@ -25,7 +25,7 @@ export default {
 
     return { open, toggle, disabled }
   }
-}
+})
 </script>
 
 <style>

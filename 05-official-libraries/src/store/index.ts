@@ -3,18 +3,6 @@ import { createStore } from 'vuex'
 const INCREMENT = 'INCREMENT'
 const DECREMENT = 'DECREMENT'
 
-const storagePlugin = store => {
-  store.subscribe((mutation, state) => {
-    switch (mutation.type) {
-      case INCREMENT:
-      case DECREMENT:
-        // save demo counter
-        localStorage.setItem('latest_count', state.count)
-        break
-    }
-  })
-}
-
 export default createStore({
   state: {
     count: parseInt(localStorage.getItem('latest_count') || '0')
@@ -59,6 +47,16 @@ export default createStore({
     decrementAsync: ({ commit }) => setTimeout(() => commit(DECREMENT), 1000)
   },
   plugins: [
-    storagePlugin
+    store => {
+      store.subscribe((mutation, state) => {
+        switch (mutation.type) {
+          case INCREMENT:
+          case DECREMENT:
+            // save demo counter
+            localStorage.setItem('latest_count', state.count.toString())
+            break
+        }
+      })
+    }
   ]
 })
