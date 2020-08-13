@@ -66,6 +66,8 @@
       completed: todos => todos.filter(todo => todo.completed)
     }
 
+    // new Vue()
+    // Vue 3 仍然支持 2.x 那种选项 API 的方式
     Vue.createApp({
       data: () => ({
         todos: storage.get(),

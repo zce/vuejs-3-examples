@@ -72,6 +72,7 @@
 
     createApp({
       setup () {
+        // reactive Proxy
         const state = reactive({
           todos: storage.get(),
           input: '',
@@ -88,6 +89,7 @@
           })
         })
 
+        // 自动收集依赖，调用一次回调，通过 Proxy 监视哪些被使用
         watchEffect(() => {
           storage.set(state.todos)
         })

@@ -6,6 +6,7 @@ const useStorage = () => {
     set: value => localStorage.setItem('latest_todos', JSON.stringify(value))
   }
 
+  // ref 是包装为引用对象
   const store = ref(storage.get() || [])
 
   watchEffect(() => {
@@ -105,6 +106,7 @@ const useEdit = () => {
 
 const app = createApp({
   setup () {
+    // 取出初始状态
     const todos = useStorage()
 
     return {
