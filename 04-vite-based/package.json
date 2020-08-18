@@ -6,7 +6,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "todomvc-app-css": "^2.3.0",
+    "todomvc-app-css": "2.3.0",
     "vue": "3.0.0-rc.5"
   },
   "devDependencies": {
