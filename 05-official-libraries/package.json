@@ -24,7 +24,7 @@
     "@vue/cli-service": "4.5.4",
     "@vue/compiler-sfc": "3.0.0-rc.5",
     "@vue/eslint-config-standard": "5.1.2",
-    "@vue/eslint-config-typescript": "5.0.2",
+    "@vue/eslint-config-typescript": "6.0.0",
     "eslint": "7.7.0",
     "eslint-plugin-import": "2.22.0",
     "eslint-plugin-node": "11.1.0",
