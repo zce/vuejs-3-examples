@@ -1,9 +1,8 @@
 {
   "name": "01-composition-apis",
   "version": "0.1.0",
-  "license": "MIT",
   "author": "zce <w@zce.me> (https://zce.me)",
-  "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "dev": "browser-sync . --directory --watch --no-notify"
   },

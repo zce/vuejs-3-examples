@@ -3,17 +3,12 @@
 ## Project setup
 
 ```shell
-npm install
-```
+# install deps
+$ npm install # or yarn
 
-### Compiles and hot-reloads for development
+# serve and hot-reloads for development
+$ npm run dev
 
-```shell
-npm run dev
-```
-
-### Compiles and minifies for production
-
-```shell
-npm run build
+# compiles and minifies for production
+$ npm run build
 ```
