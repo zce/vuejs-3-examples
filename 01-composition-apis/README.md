@@ -1,17 +1,16 @@
 # 01-composition-apis
 
-- [Vue.js 3.0 classic usage](classic.html)
-- [Vue.js 3.0 composition usage](composition.html)
-- [发挥 Composition APIs 的价值](composition/index.html)
+- [Classic Usage](01-classic)
+- [Composition APIs Usage](02-composition)
+- [基于 Composition APIs 的 Hook 封装](03-hooks)
+- [发挥 Composition APIs 的价值](04-todos)
 
 ## Project setup
 
 ```shell
+# project setup
 $ npm install
-```
 
-### Hot-reloads for development
-
-```shell
+# hot-reloads for development
 $ npm run dev
 ```

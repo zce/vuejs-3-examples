@@ -63,7 +63,7 @@ const useAdd = todos => {
   const input = ref('')
   const addTodo = () => {
     const text = input.value && input.value.trim()
-    if (!text) return
+    if (!text || todos.find(i => i.text === text)) return
     todos.value.push({ text, completed: false })
     input.value = ''
   }
@@ -122,4 +122,3 @@ const app = createApp({
 })
 
 app.mount('#app')
-

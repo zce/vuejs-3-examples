@@ -1,5 +1,9 @@
 import { createApp, ref, onMounted, onUnmounted } from 'https://unpkg.com/vue@next/dist/vue.esm-browser.js'
 
+/**
+ * Toggle hook
+ * @param {any} initialState initial state
+ */
 const useToggle = initialState => {
   const on = ref(initialState ?? false)
   const toggle = value => {
@@ -8,6 +12,10 @@ const useToggle = initialState => {
   return { on, toggle }
 }
 
+/**
+ * Request posts by fetch hook
+ * @param {object} params request params
+ */
 const usePosts = params => {
   const posts = ref([])
   onMounted(async () => {
@@ -19,6 +27,9 @@ const usePosts = params => {
   return { posts }
 }
 
+/**
+ * Window size hook
+ */
 const useWindowSize = () => {
   const width = ref(window.innerWidth)
   const height = ref(window.innerHeight)
@@ -34,6 +45,9 @@ const useWindowSize = () => {
   return { width, height }
 }
 
+/**
+ * Hash change hook
+ */
 const useHash = () => {
   const hash = ref(location.hash)
 
@@ -46,6 +60,8 @@ const useHash = () => {
 
   return { hash }
 }
+
+// Application
 
 createApp({
   setup () {

@@ -2,8 +2,11 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
-module.exports = env => ({
-  mode: env.production ? 'production' : 'development',
+const isProd = process.env.NODE_ENV === 'production'
+
+/** @type {import('webpack').Configuration} */
+module.exports = {
+  mode: isProd ? 'production' : 'development',
   entry: './src/main.js',
   output: {
     filename: 'bundle.js'
@@ -23,7 +26,7 @@ module.exports = env => ({
       }
     ]
   },
-  devtool: env.production ? 'nosources-source-map' : 'cheap-eval-source-map',
+  devtool: isProd  ? 'hidden-source-map' : 'eval-cheap-module-source-map',
   devServer: {
     contentBase: 'dist',
     hot: true
@@ -31,9 +34,8 @@ module.exports = env => ({
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Vue.js 3.0 Beta',
+      title: 'Vue.js 3.0',
       template: 'public/index.html'
-    }),
-    env.production ? null : new webpack.HotModuleReplacementPlugin()
-  ].filter(i => i)
-})
+    })
+  ]
+}

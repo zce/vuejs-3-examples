@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue.js 3.0 Composition APIs</title>
+  <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css/index.css">
+  <style>
+    .todoapp {
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .todoapp:not([v-cloak]) {
+      opacity: 1;
+      transform: none;
+    }
+    [v-cloak] {
+      opacity: 0;
+      transform: translateY(40px) scale(0.8);
+    }
+  </style>
+</head>
+
+<body>
+  <section id="app" class="todoapp" v-cloak>
+    <header class="header">
+      <h1>todos</h1>
+      <input class="new-todo" placeholder="What needs to be done?" autocomplete="off" autofocus v-model="state.input"
+        @keyup.enter="addTodo">
+    </header>
+    <section class="main" v-show="state.todos.length">
+      <input id="toggle-all" class="toggle-all" type="checkbox" v-model="state.allDone">
+      <label for="toggle-all">Mark all as complete</label>
+      <ul class="todo-list">
+        <li v-for="todo in state.filteredTodos" :key="todo"
+          :class="{ completed: todo.completed, editing: todo === state.editingTodo }">
+          <div class="view">
+            <input class="toggle" type="checkbox" v-model="todo.completed">
+            <label @dblclick="editTodo(todo)">{{ todo.text }}</label>
+            <button class="destroy" @click="removeTodo(todo)"></button>
+          </div>
+          <input class="edit" type="text" v-model="todo.text" v-edit-focus="todo === state.editingTodo"
+            @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.escape="cancelEdit(todo)">
+        </li>
+      </ul>
+    </section>
+    <footer class="footer" v-show="state.todos.length">
+      <span class="todo-count">
+        <strong>{{ state.remaining }}</strong> {{ pluralize(state.remaining) }} left
+      </span>
+      <ul class="filters">
+        <li><a href="#/all" :class="{ selected: state.visibility === 'all' }">All</a></li>
+        <li><a href="#/active" :class="{ selected: state.visibility === 'active' }">Active</a></li>
+        <li><a href="#/completed" :class="{ selected: state.visibility === 'completed' }">Completed</a></li>
+      </ul>
+      <button class="clear-completed" @click="removeCompleted" v-show="state.todos.length > state.remaining">
+        Clear completed
+      </button>
+    </footer>
+  </section>
+  <footer class="info">
+    <p>Double-click to edit a todo</p>
+    <!-- Remove the below line ↓ -->
+    <p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
+    <!-- Change this out with your name and url ↓ -->
+    <p>Created by <a href="https://zce.me">zce</a></p>
+    <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
+  </footer>
+  <script type="module" src="app.js"></script>
+</body>
+
+</html>

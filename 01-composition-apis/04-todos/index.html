@@ -4,12 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vue.js 3.0 Composition APIs</title>
+  <title>Vue.js 3.0 Composition APIs (Hooks)</title>
   <link rel="stylesheet" href="https://unpkg.com/todomvc-app-css/index.css">
+  <style>
+    .todoapp {
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .todoapp:not([v-cloak]) {
+      opacity: 1;
+      transform: none;
+    }
+    [v-cloak] {
+      opacity: 0;
+      transform: translateY(40px) scale(0.8);
+    }
+  </style>
 </head>
 
 <body>
-  <section id="app" class="todoapp">
+  <section id="app" class="todoapp" v-cloak>
     <header class="header">
       <h1>todos</h1>
       <input class="new-todo" placeholder="What needs to be done?" autocomplete="off" autofocus v-model="input"

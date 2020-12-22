@@ -1,36 +1,36 @@
 <template>
-  <section class="todoapp">
+  <section id="app" class="todoapp" v-cloak>
     <header class="header">
       <h1>todos</h1>
-      <input class="new-todo" placeholder="What needs to be done?" autocomplete="off" autofocus v-model="state.input"
+      <input class="new-todo" placeholder="What needs to be done?" autocomplete="off" autofocus v-model="input"
         @keyup.enter="addTodo">
     </header>
-    <section class="main" v-show="state.todos.length">
-      <input id="toggle-all" class="toggle-all" type="checkbox" v-model="state.allDone">
+    <section class="main" v-show="total">
+      <input id="toggle-all" class="toggle-all" type="checkbox" v-model="allDone">
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
-        <li v-for="todo in state.filteredTodos" :key="todo"
-          :class="{ completed: todo.completed, editing: todo === state.editingTodo }">
+        <li v-for="todo in filteredTodos" :key="todo"
+          :class="{ completed: todo.completed, editing: todo === editingTodo }">
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
             <label @dblclick="editTodo(todo)">{{ todo.text }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
           </div>
-          <input class="edit" type="text" v-model="todo.text" v-edit-focus="todo === state.editingTodo"
+          <input class="edit" type="text" v-model="todo.text" v-edit-focus="todo === editingTodo"
             @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.escape="cancelEdit(todo)">
         </li>
       </ul>
     </section>
-    <footer class="footer" v-show="state.todos.length">
+    <footer class="footer" v-show="total">
       <span class="todo-count">
-        <strong>{{ state.remaining }}</strong> <span>{{ pluralize(state.remaining) }} left</span>
+        <strong>{{ remaining }}</strong> {{ remaining === 0 ? 'item' : 'items' }} left
       </span>
       <ul class="filters">
-        <li><a href="#/all" :class="{ selected: state.visibility === 'all' }">All</a></li>
-        <li><a href="#/active" :class="{ selected: state.visibility === 'active' }">Active</a></li>
-        <li><a href="#/completed" :class="{ selected: state.visibility === 'completed' }">Completed</a></li>
+        <li><a href="#/all" :class="{ selected: visibility === 'all' }">All</a></li>
+        <li><a href="#/active" :class="{ selected: visibility === 'active' }">Active</a></li>
+        <li><a href="#/completed" :class="{ selected: visibility === 'completed' }">Completed</a></li>
       </ul>
-      <button class="clear-completed" @click="removeCompleted" v-show="state.todos.length > state.remaining">
+      <button class="clear-completed" @click="removeCompleted" v-show="total > remaining">
         Clear completed
       </button>
     </footer>
@@ -46,105 +46,122 @@
 </template>
 
 <script>
-import { reactive, computed, watchEffect, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, computed, watchEffect, onMounted, onUnmounted } from 'vue'
 
-const storage = {
-  get: () => JSON.parse(localStorage.getItem('latest_todos') || '[]'),
-  set: value => localStorage.setItem('latest_todos', JSON.stringify(value))
+const useStorage = () => {
+  const storage = {
+    get: () => JSON.parse(localStorage.getItem('latest_todos') || '[]'),
+    set: value => localStorage.setItem('latest_todos', JSON.stringify(value))
+  }
+
+  // ref 是包装为引用对象
+  const store = ref(storage.get() || [])
+
+  watchEffect(() => {
+    storage.set(store.value)
+  })
+
+  return store
 }
 
-const filters = {
-  all: todos => todos,
-  active: todos => todos.filter(todo => !todo.completed),
-  completed: todos => todos.filter(todo => todo.completed)
+const useFilter = todos => {
+  const filters = {
+    all: list => list,
+    active: list => list.filter(i => !i.completed),
+    completed: list => list.filter(i => i.completed)
+  }
+
+  const visibility = ref('all')
+
+  const onHashChange = () => {
+    const hash = window.location.hash.replace(/#\/?/, '')
+    if (filters[hash]) {
+      visibility.value = hash
+    } else {
+      visibility.value = 'all'
+      window.location.hash = ''
+    }
+  }
+
+  onMounted(() => {
+    window.addEventListener('hashchange', onHashChange)
+    onHashChange()
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener('hashchange', onHashChange)
+  })
+
+  const total = computed(() => todos.value.length)
+  const remaining = computed(() => filters.active(todos.value).length)
+  const filteredTodos = computed(() => filters[visibility.value](todos.value))
+  const allDone = computed({
+    get: () => !remaining,
+    set: value => {
+      todos.value.forEach(todo => {
+        todo.completed = value
+      })
+    }
+  })
+
+  return { visibility, total, remaining, filteredTodos, allDone }
+}
+
+const useAdd = todos => {
+  const input = ref('')
+  const addTodo = () => {
+    const text = input.value && input.value.trim()
+    if (!text || todos.value.find(i => i.text === text)) return
+    todos.value.push({ text, completed: false })
+    input.value = ''
+  }
+  return { input, addTodo }
+}
+
+const useRemove = todos => {
+  const removeTodo = todo => {
+    todos.value.splice(todos.value.indexOf(todo), 1)
+  }
+  const removeCompleted = () => {
+    todos.value = todos.value.filter(i => !i.completed)
+  }
+  return { removeTodo, removeCompleted }
+}
+
+const useEdit = () => {
+  let beforeEditText = null
+  const editingTodo = ref(null)
+
+  const editTodo = todo => {
+    editingTodo.value = todo
+    beforeEditText = todo.text
+  }
+
+  const doneEdit = todo => {
+    if (!editingTodo.value) return
+    todo.text = todo.text.trim()
+    todo.text || removeTodo(todo)
+    editingTodo.value = null
+  }
+
+  const cancelEdit = todo => {
+    editingTodo.value = null
+    todo.text = beforeEditText
+  }
+
+  return { editingTodo, editTodo, doneEdit, cancelEdit }
 }
 
 export default {
   setup () {
-    const state = reactive({
-      todos: storage.get(),
-      input: '',
-      visibility: 'all',
-      remaining: computed(() => filters.active(state.todos).length),
-      filteredTodos: computed(() => filters[state.visibility](state.todos)),
-      allDone: computed({
-        get: () => !state.remaining,
-        set: (value) => {
-          state.todos.forEach(todo => {
-            todo.completed = value
-          })
-        }
-      })
-    })
-
-    watchEffect(() => {
-      storage.set(state.todos)
-    })
-
-    onMounted(() => {
-      window.addEventListener('hashchange', onHashChange)
-      onHashChange()
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('hashchange', onHashChange)
-    })
-
-    const onHashChange = () => {
-      const visibility = window.location.hash.replace(/#\/?/, '')
-      if (filters[visibility]) {
-        state.visibility = visibility
-      } else {
-        state.visibility = 'all'
-        window.location.hash = ''
-      }
-    }
-
-    const addTodo = () => {
-      const text = state.input && state.input.trim()
-      if (!text) return
-      state.todos.push({ text, completed: false })
-      state.input = ''
-    }
-
-    const removeTodo = todo => {
-      state.todos.splice(state.todos.indexOf(todo), 1)
-    }
-
-    const editTodo = todo => {
-      state.editingTodo = todo
-      state.beforeEditText = todo.text
-    }
-
-    const doneEdit = todo => {
-      if (!state.editingTodo) return
-      todo.text = todo.text.trim()
-      todo.text || removeTodo(todo)
-      state.editingTodo = null
-    }
-
-    const cancelEdit = todo => {
-      state.editingTodo = null
-      todo.text = state.beforeEditText
-    }
-
-    const removeCompleted = () => {
-      state.todos = filters.active(state.todos)
-    }
-
-    const pluralize = count => {
-      return count === 1 ? 'item' : 'items'
-    }
+    // 取出初始状态
+    const todos = useStorage()
 
     return {
-      state,
-      addTodo,
-      removeTodo,
-      editTodo,
-      doneEdit,
-      cancelEdit,
-      removeCompleted,
-      pluralize
+      ...useFilter(todos),
+      ...useAdd(todos),
+      ...useRemove(todos),
+      ...useEdit()
     }
   },
   directives: {
