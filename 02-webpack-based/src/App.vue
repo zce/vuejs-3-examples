@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed, watchEffect, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watchEffect, onMounted, onUnmounted } from 'vue'
 
 const useStorage = () => {
   const storage = {
@@ -88,7 +88,7 @@ const useFilter = todos => {
   const remaining = computed(() => filters.active(todos.value).length)
   const filteredTodos = computed(() => filters[visibility.value](todos.value))
   const allDone = computed({
-    get: () => !remaining,
+    get: () => !remaining.value,
     set: value => {
       todos.value.forEach(todo => {
         todo.completed = value
@@ -110,17 +110,7 @@ const useAdd = todos => {
   return { input, addTodo }
 }
 
-const useRemove = todos => {
-  const removeTodo = todo => {
-    todos.value.splice(todos.value.indexOf(todo), 1)
-  }
-  const removeCompleted = () => {
-    todos.value = todos.value.filter(i => !i.completed)
-  }
-  return { removeTodo, removeCompleted }
-}
-
-const useEdit = () => {
+const useEdit = todos => {
   let beforeEditText = null
   const editingTodo = ref(null)
 
@@ -141,7 +131,14 @@ const useEdit = () => {
     todo.text = beforeEditText
   }
 
-  return { editingTodo, editTodo, doneEdit, cancelEdit }
+  const removeTodo = todo => {
+    todos.value.splice(todos.value.indexOf(todo), 1)
+  }
+  const removeCompleted = () => {
+    todos.value = todos.value.filter(i => !i.completed)
+  }
+
+  return { editingTodo, editTodo, doneEdit, cancelEdit, removeTodo, removeCompleted }
 }
 
 export default {
@@ -152,8 +149,7 @@ export default {
     return {
       ...useFilter(todos),
       ...useAdd(todos),
-      ...useRemove(todos),
-      ...useEdit()
+      ...useEdit(todos)
     }
   },
   directives: {

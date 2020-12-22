@@ -2,22 +2,19 @@
   <section id="app" class="todoapp" v-cloak>
     <header class="header">
       <h1>todos</h1>
-      <input class="new-todo" placeholder="What needs to be done?" autocomplete="off" autofocus v-model="input"
-        @keyup.enter="addTodo">
+      <input class="new-todo" placeholder="What needs to be done?" autocomplete="off" autofocus v-model="input" @keyup.enter="addTodo">
     </header>
     <section class="main" v-show="total">
       <input id="toggle-all" class="toggle-all" type="checkbox" v-model="allDone">
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
-        <li v-for="todo in filteredTodos" :key="todo.id"
-          :class="{ completed: todo.completed, editing: todo === editingTodo }">
+        <li v-for="todo in filteredTodos" :key="todo.id" :class="{ completed: todo.completed, editing: todo === editingTodo }">
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
             <label @dblclick="editTodo(todo)">{{ todo.text }}</label>
             <button class="destroy" @click="removeTodo(todo)"></button>
           </div>
-          <input class="edit" type="text" v-model="todo.text" v-edit-focus="todo === editingTodo"
-            @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.escape="cancelEdit(todo)">
+          <input class="edit" type="text" v-model="todo.text" v-edit-focus="todo === editingTodo" @blur="doneEdit(todo)" @keyup.enter="doneEdit(todo)" @keyup.escape="cancelEdit(todo)">
         </li>
       </ul>
     </section>
@@ -30,9 +27,7 @@
         <li><a href="#/active" :class="{ selected: visibility === 'active' }">Active</a></li>
         <li><a href="#/completed" :class="{ selected: visibility === 'completed' }">Completed</a></li>
       </ul>
-      <button class="clear-completed" @click="removeCompleted" v-show="total > remaining">
-        Clear completed
-      </button>
+      <button class="clear-completed" @click="removeCompleted" v-show="total > remaining">Clear completed</button>
     </footer>
   </section>
   <footer class="info">
@@ -44,7 +39,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed, watchEffect, onMounted, onUnmounted } from 'vue'
+import { ref, computed, watchEffect, onMounted, onUnmounted } from 'vue'
 
 const useStorage = () => {
   const storage = {
@@ -52,7 +47,6 @@ const useStorage = () => {
     set: value => localStorage.setItem('latest_todos', JSON.stringify(value))
   }
 
-  // ref 是包装为引用对象
   const store = ref(storage.get() || [])
 
   watchEffect(() => {
@@ -94,7 +88,7 @@ const useFilter = todos => {
   const remaining = computed(() => filters.active(todos.value).length)
   const filteredTodos = computed(() => filters[visibility.value](todos.value))
   const allDone = computed({
-    get: () => !remaining,
+    get: () => !remaining.value,
     set: value => {
       todos.value.forEach(todo => {
         todo.completed = value
@@ -116,17 +110,7 @@ const useAdd = todos => {
   return { input, addTodo }
 }
 
-const useRemove = todos => {
-  const removeTodo = todo => {
-    todos.value.splice(todos.value.indexOf(todo), 1)
-  }
-  const removeCompleted = () => {
-    todos.value = todos.value.filter(i => !i.completed)
-  }
-  return { removeTodo, removeCompleted }
-}
-
-const useEdit = () => {
+const useEdit = todos => {
   let beforeEditText = null
   const editingTodo = ref(null)
 
@@ -147,7 +131,14 @@ const useEdit = () => {
     todo.text = beforeEditText
   }
 
-  return { editingTodo, editTodo, doneEdit, cancelEdit }
+  const removeTodo = todo => {
+    todos.value.splice(todos.value.indexOf(todo), 1)
+  }
+  const removeCompleted = () => {
+    todos.value = todos.value.filter(i => !i.completed)
+  }
+
+  return { editingTodo, editTodo, doneEdit, cancelEdit, removeTodo, removeCompleted }
 }
 
 export default {
@@ -158,8 +149,7 @@ export default {
     return {
       ...useFilter(todos),
       ...useAdd(todos),
-      ...useRemove(todos),
-      ...useEdit()
+      ...useEdit(todos)
     }
   },
   directives: {

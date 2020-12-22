@@ -1,16 +1,16 @@
 {
   "name": "04-vite-based",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build"
   },
   "dependencies": {
     "todomvc-app-css": "2.3.0",
-    "vue": "3.0.0-rc.5"
+    "vue": "3.0.4"
   },
   "devDependencies": {
-    "vite": "1.0.0-rc.4",
-    "@vue/compiler-sfc": "3.0.0-rc.5"
+    "vite": "1.0.0-rc.13",
+    "@vue/compiler-sfc": "3.0.4"
   }
 }
