@@ -13,12 +13,13 @@ const filters = {
   completed: todos => todos.filter(todo => todo.completed)
 }
 
-createApp({
+const app = createApp({
   setup () {
-    // reactive Proxy
+    // reactive => Proxy
     const state = reactive({
       todos: storage.get(),
-      input: '',
+      // 动态添加的属性也可以被监视到，这是 Vue.js 2.x 中 defineProperty 所做不到的！
+      // input: '',
       visibility: 'all',
       remaining: computed(() => filters.active(state.todos).length),
       filteredTodos: computed(() => filters[state.visibility](state.todos)),
@@ -37,15 +38,6 @@ createApp({
       storage.set(state.todos)
     })
 
-    onMounted(() => {
-      window.addEventListener('hashchange', onHashChange)
-      onHashChange()
-    })
-
-    onUnmounted(() => {
-      window.removeEventListener('hashchange', onHashChange)
-    })
-
     const onHashChange = () => {
       const visibility = window.location.hash.replace(/#\/?/, '')
       if (filters[visibility]) {
@@ -56,10 +48,19 @@ createApp({
       }
     }
 
+    onMounted(() => {
+      window.addEventListener('hashchange', onHashChange)
+      onHashChange()
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('hashchange', onHashChange)
+    })
+
     const addTodo = () => {
       const text = state.input && state.input.trim()
       if (!text || state.todos.find(i => i.text === text)) return
-      state.todos.push({ text, completed: false })
+      state.todos.push({ id: Date.now(), text, completed: false })
       state.input = ''
     }
 
@@ -68,6 +69,7 @@ createApp({
     }
 
     const editTodo = todo => {
+      // 动态添加的属性也可以被监视到，这是 Vue.js 2.x 中 defineProperty 所做不到的！
       state.editingTodo = todo
       state.beforeEditText = todo.text
     }
@@ -88,10 +90,6 @@ createApp({
       state.todos = filters.active(state.todos)
     }
 
-    const pluralize = count => {
-      return count === 1 ? 'item' : 'items'
-    }
-
     return {
       state,
       addTodo,
@@ -99,11 +97,12 @@ createApp({
       editTodo,
       doneEdit,
       cancelEdit,
-      removeCompleted,
-      pluralize
+      removeCompleted
     }
   },
   directives: {
     editFocus: (el, { value }) => value && el.focus()
   }
-}).mount('#app')
+})
+
+app.mount('#app')

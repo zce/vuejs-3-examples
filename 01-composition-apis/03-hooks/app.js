@@ -5,11 +5,11 @@ import { createApp, ref, onMounted, onUnmounted } from 'https://unpkg.com/vue@ne
  * @param {any} initialState initial state
  */
 const useToggle = initialState => {
-  const on = ref(initialState ?? false)
-  const toggle = value => {
-    on.value = value ?? !on.value
+  const open = ref(initialState ?? false)
+  const toggle = () => {
+    open.value = !open.value
   }
-  return { on, toggle }
+  return { open, toggle }
 }
 
 /**
@@ -61,9 +61,10 @@ const useHash = () => {
   return { hash }
 }
 
-// Application
-
-createApp({
+/**
+ * Application
+ */
+const app = createApp({
   setup () {
     return {
       ...useToggle(),
@@ -72,4 +73,6 @@ createApp({
       ...useHash(),
     }
   }
-}).mount('#app')
+})
+
+app.mount('#app')

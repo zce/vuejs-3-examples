@@ -11,8 +11,7 @@ const filters = {
   completed: todos => todos.filter(todo => todo.completed)
 }
 
-// new Vue()
-// Vue 3 仍然支持 2.x 那种选项 API 的方式
+// Vue 3.0 仍然支持 2.x 选项 API 的方式
 const app = createApp({
   data: () => ({
     todos: storage.get(),
@@ -41,8 +40,9 @@ const app = createApp({
   },
 
   watch: {
-    todos () {
-      storage.set(this.todos)
+    todos: {
+      handler: value => storage.set(value),
+      deep: true
     }
   },
 
@@ -69,7 +69,7 @@ const app = createApp({
     addTodo () {
       const text = this.input && this.input.trim()
       if (!text || this.todos.find(i => i.text === text)) return
-      this.todos.push({ text, completed: false })
+      this.todos.push({ id: Date.now(), text, completed: false })
       this.input = ''
     },
 

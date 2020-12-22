@@ -39,8 +39,9 @@ const app = new Vue({
   },
 
   watch: {
-    todos () {
-      storage.set(this.todos)
+    todos: {
+      handler: value => storage.set(value),
+      deep: true
     }
   },
 
@@ -67,7 +68,7 @@ const app = new Vue({
     addTodo () {
       const text = this.input && this.input.trim()
       if (!text || this.todos.find(i => i.text === text)) return
-      this.todos.push({ text, completed: false })
+      this.todos.push({ id: Date.now(), text, completed: false })
       this.input = ''
     },
 

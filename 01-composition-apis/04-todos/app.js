@@ -64,7 +64,7 @@ const useAdd = todos => {
   const addTodo = () => {
     const text = input.value && input.value.trim()
     if (!text || todos.find(i => i.text === text)) return
-    todos.value.push({ text, completed: false })
+    todos.value.push({ id: Date.now(), text, completed: false })
     input.value = ''
   }
   return { input, addTodo }

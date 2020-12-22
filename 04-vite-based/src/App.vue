@@ -9,7 +9,7 @@
       <input id="toggle-all" class="toggle-all" type="checkbox" v-model="allDone">
       <label for="toggle-all">Mark all as complete</label>
       <ul class="todo-list">
-        <li v-for="todo in filteredTodos" :key="todo"
+        <li v-for="todo in filteredTodos" :key="todo.id"
           :class="{ completed: todo.completed, editing: todo === editingTodo }">
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
@@ -37,9 +37,7 @@
   </section>
   <footer class="info">
     <p>Double-click to edit a todo</p>
-    <!-- Remove the below line ↓ -->
     <p>Template by <a href="http://sindresorhus.com">Sindre Sorhus</a></p>
-    <!-- Change this out with your name and url ↓ -->
     <p>Created by <a href="https://zce.me">zce</a></p>
     <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
   </footer>
@@ -112,7 +110,7 @@ const useAdd = todos => {
   const addTodo = () => {
     const text = input.value && input.value.trim()
     if (!text || todos.value.find(i => i.text === text)) return
-    todos.value.push({ text, completed: false })
+    todos.value.push({ id: Date.now(), text, completed: false })
     input.value = ''
   }
   return { input, addTodo }

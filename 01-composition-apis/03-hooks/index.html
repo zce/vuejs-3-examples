@@ -4,23 +4,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vue.js 3.0 Composition APIs</title>
+  <title>Hooks - Vue.js 3.0</title>
   <style>
-    [v-cloak] {
-      display: none;
-    }
+    body { max-width: 500px; margin: 50px auto; }
+    [v-cloak] { display: none; }
   </style>
 </head>
 
 <body>
   <section id="app" v-cloak>
-    <button @click="toggle()">{{ on ? 'hide' : 'show' }}</button>
-    <ul v-show="on">
+    <h3>Posts</h3>
+    <ul>
       <li v-for="item in posts" :key="item.id">{{ item.title }}</li>
     </ul>
-    <p>width: <span>{{ width }}</span></p>
-    <p>height: <span>{{ height }}</span></p>
-    <p>hash: <span>{{ hash }}</span></p>
+    <button @click="toggle">{{ open ? 'hide' : 'show' }}</button>
+    <div v-show="open">
+      <p>width: <span>{{ width }}</span></p>
+      <p>height: <span>{{ height }}</span></p>
+      <p>hash: <span>{{ hash }}</span></p>
+    </div>
   </section>
 
   <script type="module" src="app.js"></script>
