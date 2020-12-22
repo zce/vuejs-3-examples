@@ -6,7 +6,7 @@ const useStorage = () => {
     set: value => localStorage.setItem('latest_todos', JSON.stringify(value))
   }
 
-  // ref 是包装为引用对象
+  // 包装为引用对象
   const store = ref(storage.get() || [])
 
   watchEffect(() => {
@@ -48,7 +48,7 @@ const useFilter = todos => {
   const remaining = computed(() => filters.active(todos.value).length)
   const filteredTodos = computed(() => filters[visibility.value](todos.value))
   const allDone = computed({
-    get: () => !remaining,
+    get: () => !remaining.value,
     set: value => {
       todos.value.forEach(todo => {
         todo.completed = value
@@ -63,24 +63,14 @@ const useAdd = todos => {
   const input = ref('')
   const addTodo = () => {
     const text = input.value && input.value.trim()
-    if (!text || todos.find(i => i.text === text)) return
+    if (!text || todos.value.find(i => i.text === text)) return
     todos.value.push({ id: Date.now(), text, completed: false })
     input.value = ''
   }
   return { input, addTodo }
 }
 
-const useRemove = todos => {
-  const removeTodo = todo => {
-    todos.value.splice(todos.value.indexOf(todo), 1)
-  }
-  const removeCompleted = () => {
-    todos.value = todos.value.filter(i => !i.completed)
-  }
-  return { removeTodo, removeCompleted }
-}
-
-const useEdit = () => {
+const useEdit = todos => {
   let beforeEditText = null
   const editingTodo = ref(null)
 
@@ -101,7 +91,14 @@ const useEdit = () => {
     todo.text = beforeEditText
   }
 
-  return { editingTodo, editTodo, doneEdit, cancelEdit }
+  const removeTodo = todo => {
+    todos.value.splice(todos.value.indexOf(todo), 1)
+  }
+  const removeCompleted = () => {
+    todos.value = todos.value.filter(i => !i.completed)
+  }
+
+  return { editingTodo, editTodo, doneEdit, cancelEdit, removeTodo, removeCompleted }
 }
 
 const app = createApp({
@@ -112,8 +109,7 @@ const app = createApp({
     return {
       ...useFilter(todos),
       ...useAdd(todos),
-      ...useRemove(todos),
-      ...useEdit()
+      ...useEdit(todos)
     }
   },
   directives: {
