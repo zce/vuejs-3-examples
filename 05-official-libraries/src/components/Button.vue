@@ -14,6 +14,7 @@ export default defineComponent({
     // props 是一个 proxy 对象，不能解构，解构过后丢失数据响应能力
     const onClick = (e: Event) => {
       emit('custom', e)
+      console.log(props.size)
     }
 
     return { onClick }

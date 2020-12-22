@@ -2,9 +2,11 @@
   <button @click="toggle(true)">open</button>
   <teleport to="#app" :disabled="disabled">
     <div class="modal" v-show="open">
-      <h2>Modal title</h2>
-      <p>balabala...</p>
-      <button @click="toggle(false)">close</button>
+      <div class="modal-dialog">
+        <h2>Modal title</h2>
+        <p>balabala...</p>
+        <button @click="toggle(false)">close</button>
+      </div>
     </div>
   </teleport>
 </template>
@@ -40,5 +42,10 @@ export default defineComponent({
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+  background-color: #fff;
+  padding: 30px 60px;
 }
 </style>
