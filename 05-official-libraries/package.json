@@ -43,7 +43,7 @@
     "sass": "1.30.0",
     "sass-loader": "10.1.0",
     "typescript": "4.1.3",
-    "vue-jest": "5.0.0-0"
+    "vue-jest": "4.0.0-rc.1"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
