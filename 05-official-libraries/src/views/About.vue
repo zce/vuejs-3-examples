@@ -2,7 +2,6 @@
   <div class="about">
     <h1>This is an about page</h1>
     <Counter />
-
     <Modal />
   </div>
 </template>
@@ -22,6 +21,7 @@ export default defineComponent({
   setup () {
     const route = useRoute()
     console.log(route)
+    // => { path, name, params, query, hash, fullPath, matched, meta }
   }
 })
 </script>

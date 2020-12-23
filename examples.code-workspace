@@ -25,7 +25,15 @@
 			"path": "05-official-libraries"
 		},
 		{
-			"name": "root",
+			"name": "06-community-libraries",
+			"path": "06-community-libraries"
+		},
+		{
+			"name": "07-encore",
+			"path": "07-encore"
+		},
+		{
+			"name": "99-root",
 			"path": "."
 		}
 	],
