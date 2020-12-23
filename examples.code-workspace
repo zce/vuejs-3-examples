@@ -23,6 +23,10 @@
 		{
 			"name": "05-official-libraries",
 			"path": "05-official-libraries"
+		},
+		{
+			"name": "root",
+			"path": "."
 		}
 	],
 	"settings": {
