@@ -14,7 +14,7 @@
   "devDependencies": {
     "@vue/compiler-sfc": "3.0.4",
     "css-loader": "5.0.1",
-    "html-webpack-plugin": "4.5.0",
+    "html-webpack-plugin": "4.5.2",
     "style-loader": "2.0.0",
     "vue-loader": "16.1.2",
     "webpack": "5.11.0",
