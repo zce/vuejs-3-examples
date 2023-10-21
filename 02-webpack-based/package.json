@@ -8,7 +8,7 @@
     "dev": "NODE_ENV=development webpack serve"
   },
   "dependencies": {
-    "todomvc-app-css": "2.3.0",
+    "todomvc-app-css": "2.4.3",
     "vue": "3.0.4"
   },
   "devDependencies": {
