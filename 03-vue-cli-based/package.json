@@ -10,7 +10,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "3.8.1",
+    "core-js": "3.33.3",
     "todomvc-app-css": "2.3.0",
     "vue": "3.0.4"
   },
