@@ -7,10 +7,10 @@
   },
   "dependencies": {
     "element-plus": "1.0.1-beta.14",
-    "vue": "3.0.4"
+    "vue": "3.3.9"
   },
   "devDependencies": {
     "vite": "1.0.0-rc.13",
-    "@vue/compiler-sfc": "3.0.4"
+    "@vue/compiler-sfc": "3.3.9"
   }
 }
